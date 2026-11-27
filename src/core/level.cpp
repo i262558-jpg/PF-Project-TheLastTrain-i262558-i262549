@@ -106,10 +106,10 @@ bool validateStartingRoom(int startFloor, int startRoom,
 {
     (void)horizontalConn;
 
-    if (startFloor < 1 || startFloor > NUM_FLOORS) {
+    if (startFloor < 0 || startFloor >= NUM_FLOORS) {
         return false;
     }
-    if(startRoom < 1 || startRoom > ROOMS_PER_FLOOR){
+    if(startRoom < 0 || startRoom >= ROOMS_PER_FLOOR){
         return false;
     }
     return true;
