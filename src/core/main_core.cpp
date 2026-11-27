@@ -6,8 +6,8 @@
 
 int main() {
     // Player State Primitives
-    int playerFloor = 1;
-    int playerRoom = 1;
+    int playerFloor = 0;
+    int playerRoom = 0;
     int energy = INITIAL_ENERGY;
     int time = INITIAL_TIME;
     int score = INITIAL_SCORE;
