@@ -114,3 +114,41 @@ bool validateStartingRoom(int startFloor, int startRoom,
     }
     return true;
 }
+
+bool loadInitialState(const char* filename,
+                      int& playerFloor, int& playerRoom,
+                      int& energy, int& time, int& score,
+                      char inventory[MAX_INVENTORY_CAPACITY], int& inventoryCount,
+                      bool objectives[NUM_OBJECTIVES], int& emergencyTripsLeft)
+{
+    (void)playerFloor;
+    (void)playerRoom;
+    (void)inventory;
+
+    ifstream file(filename);
+    if (!file.is_open()) {
+        return false;
+    }
+
+    inventoryCount = 0;
+    emergencyTripsLeft = 0;
+    for (int i = 0; i < NUM_OBJECTIVES; i++) {
+        objectives[i] = false;
+    }
+
+    string line;
+    while (getline(file, line)) {
+        if (line.find("INITIAL_ENERGY:") == 0) {
+            energy = stoi(line.substr(15));
+        }
+        if (line.find("INITIAL_TIME:") == 0) {
+            time = stoi(line.substr(13));
+        }
+        if (line.find("INITIAL_SCORE:") == 0) {
+            score = stoi(line.substr(14));
+        }
+    }
+
+    file.close();
+    return true;
+}
