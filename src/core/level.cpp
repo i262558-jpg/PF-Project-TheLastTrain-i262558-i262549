@@ -47,3 +47,56 @@ bool loadBuildingMap(const char* filename,
     file.close();
     return true;
 }
+
+const char* getEntityName(char entitySymbol)
+{
+    if (entitySymbol == '<') {
+        return "Master Key";
+    }
+    if (entitySymbol == ')') {
+        return "Energy Pack";
+    }
+    if (entitySymbol == '\\') {
+        return "Emergency Toolkit";
+    }
+    if (entitySymbol == '4') {
+        return "Clue Digit 4";
+    }
+    if (entitySymbol == '2') {
+        return "Clue Digit 2";
+    }
+    if (entitySymbol == '7') {
+        return "Clue Digit 7";
+    }
+    if (entitySymbol == '*') {
+        return "Fuse";
+    }
+    if (entitySymbol == '~') {
+        return "Cat";
+    }
+    if (entitySymbol == ';') {
+        return "Control Panel";
+    }
+    if (entitySymbol == '(') {
+        return "Lift Pass";
+    }
+    if (entitySymbol == '!') {
+        return "Injured Passenger";
+    }
+    if (entitySymbol == '%') {
+        return "Medical Kit";
+    }
+    if (entitySymbol == '$') {
+        return "Emergency Access Card";
+    }
+    if (entitySymbol == '^') {
+        return "Cabinet";
+    }
+    if (entitySymbol == '@') {
+        return "Cat Carrier";
+    }
+    if (entitySymbol == '&') {
+        return "Observation Token";
+    }
+    return "Unknown";
+}
