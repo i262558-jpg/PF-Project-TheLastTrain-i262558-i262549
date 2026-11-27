@@ -91,5 +91,10 @@ bool isDirectlyConnected(int fromF, int fromR, int toF, int toR,
             return true;
         }
     }
+
+    if (  (fromF == 0 && toF == 1) || (fromF == 1 && toF == 0)   ) {
+        outConnType = '1';
+        return true;
+    }
     return false;
 }
