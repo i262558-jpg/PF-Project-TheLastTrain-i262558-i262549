@@ -47,12 +47,47 @@ bool addItem(char inventory[MAX_INVENTORY_CAPACITY], int& inventoryCount, char i
 
 bool removeItem(char inventory[MAX_INVENTORY_CAPACITY], int& inventoryCount, char itemSymbol)
 {
-    for (int i = 0; i < inventoryCount - 1; i++) {
+    for (int i = 0; i < inventoryCount; i++) {
         if (inventory[i] == itemSymbol) {
-            for(int j = i; j < inventoryCount; j++){
+            for(int j = i; j < inventoryCount - 1; j++){
                 inventory[j] = inventory[j + 1];
             }
             inventoryCount--;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool isDirectlyConnected(int fromF, int fromR, int toF, int toR,
+                         const char horizontalConn[NUM_FLOORS][ROOMS_PER_FLOOR - 1],
+                         char& outConnType)
+{
+    outConnType = CONN_NONE;
+
+    if (fromF < 0 || fromF >= NUM_FLOORS || toF < 0 || toF >= NUM_FLOORS ||
+        fromR < 0 || fromR >= ROOMS_PER_FLOOR || toR < 0 || toR >= ROOMS_PER_FLOOR) {
+        return false;
+    }
+
+    if (fromF == toF && (fromR - toR == 1 || toR - fromR == 1)) {
+        int left = fromR;
+        if (toR < fromR) {
+            left = toR;
+        }
+        char conn = horizontalConn[fromF][left];
+        if (conn == CONN_DOOR || conn == CONN_WINDOW || conn == CONN_LOCKED_DOOR) {
+            outConnType = conn;
+            return true;
+        }
+    }
+    if (fromR == 0 && toR == 0) {
+        int low = fromF;
+        if (toF < fromF) {
+            low = toF;
+        }
+        if ( (fromF - toF == 1 || toF - fromF == 1) && (low == 0 || low ==1 || low == 3) ) {
+            outConnType = 'S';
             return true;
         }
     }
