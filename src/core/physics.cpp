@@ -92,9 +92,16 @@ bool isDirectlyConnected(int fromF, int fromR, int toF, int toR,
         }
     }
 
-    if (  (fromF == 0 && toF == 1) || (fromF == 1 && toF == 0)   ) {
+    if ( ((fromF == 0 && toF == 1) || (fromF == 1 && toF == 0)) && ( fromR == 1 || fromR == 2) && ( toR == 1 || toR == 2) ) {
         outConnType = '1';
         return true;
     }
+
+    if ( ((fromF == 1 && toF == 3) || (fromF == 1 && toF == 4) || (fromF == 3 && toF == 1) || (fromF == 3 && toF == 4) || (fromF == 4 && toF == 1) || (fromF == 4 && toF == 3)) && fromR == 3 && toR == 3 ) {
+        outConnType = '2';
+        return true;
+    }
+
     return false;
 }
+
