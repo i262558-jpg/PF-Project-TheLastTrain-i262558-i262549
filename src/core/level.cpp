@@ -26,9 +26,10 @@ bool loadBuildingMap(const char* filename,
         lineCount++;
     }
 
-    cout << lines[8] << "\n";
-    cout << lines[9] << "\n";
-    
+    cout << lines[8][20] << "\n";
+    cout << lines[8][32] << "\n";
+    cout << lines[8][44] << "\n";
+
     file.close();
     return true;
 }
