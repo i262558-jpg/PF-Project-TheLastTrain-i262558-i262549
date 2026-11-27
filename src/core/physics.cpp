@@ -44,3 +44,17 @@ bool addItem(char inventory[MAX_INVENTORY_CAPACITY], int& inventoryCount, char i
     inventoryCount++;
     return true;
 }
+
+bool removeItem(char inventory[MAX_INVENTORY_CAPACITY], int& inventoryCount, char itemSymbol)
+{
+    for (int i = 0; i < inventoryCount - 1; i++) {
+        if (inventory[i] == itemSymbol) {
+            for(int j = i; j < inventoryCount; j++){
+                inventory[j] = inventory[j + 1];
+            }
+            inventoryCount--;
+            return true;
+        }
+    }
+    return false;
+}
