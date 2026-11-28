@@ -151,20 +151,39 @@ void writeGameSummaryReport(const char* filename,
       if(victory)
         fout<<"Mission Status:Victory"<<'\n';
       else
-        fout<<"Mission Status:Failed"<<'\n';
-      for(int i=0;i<NUM_OBJECTIVES;i++)
+       { fout<<"Mission Status:Failed"<<'\n';
+         const char* names[NUM_OBJECTIVES] = {
+           "Master Key collected",
+           "Clue digit 4 found",
+            "Clue digit 2 found",
+            "Clue digit 7 found",
+               "Cabinet unlocked",
+              "Train Key acquired",
+                  "Fuse collected",
+                  "Fuse installed",
+                "Lift Pass collected",
+                    "Lift 2 active",
+                 "Passenger rescued",
+                "Cat Carrier collected",
+                   "Cat secured",
+                 "Train prepared",
+                  "Mission won",
+                  "Mission failed"
+              };
+      for(int i = 0; i < NUM_OBJECTIVES; i++)
         {
-            fout<<"Objective"<<i+1<<":";
-            if(objectives[i])
-              fout<<"Completed"<<'\n';
-            else
-               fout<<"Incomplete"<<'\n';
+           fout<<names[i]<<":";
+           if(objectives[i])
+             fout<<"Completed"<<'\n';
+           else
+             fout<<"Incomplete"<<'\n';
         }
     }
     if(!fout)
      return;
     fout.close();
-  }                          
+  } 
+}                         
       
                        
 // File persistence for savegame.txt and game_summary.txt using primitive variables
