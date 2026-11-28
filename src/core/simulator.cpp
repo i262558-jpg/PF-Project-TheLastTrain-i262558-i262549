@@ -29,10 +29,8 @@ bool handleMoveCommand(int targetFloor, int targetRoom,
           return false;
         int energyCost=0;
         int timeCost=0;
-        if(!getMoveCost(connType,energyCost,timeCost))
-          {
-            return false;
-           }
+        getMoveCost(connType,energyCost,timeCost);
+         
      if(connType == '2' && !lift2Operational)
          {
              if(!hasItem(inventory, inventoryCount, ENT_EMERGENCY_CARD))
@@ -248,7 +246,7 @@ bool handleCollectCommand(char itemSymbol, int currentFloor, int currentRoom,
     {
       return false;
     }
-   if(itemSymbol== NT_MASTER_KEY&&horizontalConn[2][0]!=CONN_LOCKED_DOOR)
+   if(itemSymbol== ENT_MASTER_KEY&&horizontalConn[2][0]!=CONN_LOCKED_DOOR)
      {
        return false;
      } 
