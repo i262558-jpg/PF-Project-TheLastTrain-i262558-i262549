@@ -6,6 +6,14 @@ using namespace std;
 
 // Terminal UI and dashboard rendering using primitive parameters
 
+const char* roomNames[NUM_FLOORS][ROOMS_PER_FLOOR] = {
+    { "Entrance Lobby", "Reception", "Waiting Area", "Utility Room" },
+    { "Lounge", "Archive", "Lab", "Meeting Room" },
+    { "Stairwell Annex", "Security Vestibule", "Animal Room", "Control Room" },
+    { "First Aid Station", "Medical Room", "Maintenance Corridor", "Office" },
+    { "Security Room", "Train Boarding Platform", "Storage Room", "Observation Deck" }
+};
+
 void renderDashboard(int playerFloor, int playerRoom, int energy, int time, int score,
                      const char inventory[MAX_INVENTORY_CAPACITY], int inventoryCount,
                      int emergencyTripsLeft)
@@ -34,7 +42,7 @@ void renderRoomDetails(int floor, int room,
                        const char roomEntities[NUM_FLOORS][ROOMS_PER_FLOOR][MAX_ENTITIES_PER_ROOM],
                        int entityCount)
 {
-    cout << "=====================================" << endl << "ROOM F" << floor + 1 << "-R" << room + 1 << endl << "=====================================" << endl;
+    cout << "=====================================" << endl << "ROOM F" << floor + 1 << "-R" << room + 1 << " (" << roomNames[floor][room] << ")" << endl << "=====================================" << endl;
     if (entityCount == 0) {
         cout << "Nothing here." << endl;
     }
