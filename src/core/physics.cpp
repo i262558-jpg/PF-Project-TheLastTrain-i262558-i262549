@@ -105,3 +105,21 @@ bool isDirectlyConnected(int fromF, int fromR, int toF, int toR,
     return false;
 }
 
+bool canTraverse(int targetFloor, int targetRoom, char connType,
+                 const char inventory[MAX_INVENTORY_CAPACITY], int inventoryCount,
+                 int emergencyTripsLeft, bool lift2Operational)
+{
+    (void)targetFloor;
+    (void)targetRoom;
+
+    if (connType == CONN_DOOR || connType == CONN_WINDOW || connType == 'S' || connType == '1') {
+        return true;
+    }
+    if (connType == CONN_LOCKED_DOOR) {
+        return hasItem(inventory, inventoryCount, ENT_MASTER_KEY);
+    }
+    if (connType == '2') {
+        return lift2Operational || emergencyTripsLeft > 0;
+    }
+    return false;
+}
