@@ -123,3 +123,22 @@ bool canTraverse(int targetFloor, int targetRoom, char connType,
     }
     return false;
 }
+
+void getMoveCost(char connType, int& energyCost, int& timeCost)
+{
+    energyCost = 0;
+    timeCost = 0;
+
+    if (connType == CONN_DOOR || connType == CONN_LOCKED_DOOR || connType == 'S') {
+        energyCost = COST_MOVE_ORDINARY_ENERGY;
+        timeCost = COST_MOVE_ORDINARY_TIME;
+    }
+    if (connType == CONN_WINDOW) {
+        energyCost = COST_MOVE_WINDOW_ENERGY;
+        timeCost = COST_MOVE_WINDOW_TIME;
+    }
+    if (connType == '1' || connType == '2') {
+        energyCost = COST_MOVE_LIFT_ENERGY;
+        timeCost = COST_MOVE_LIFT_TIME;
+    }
+}
