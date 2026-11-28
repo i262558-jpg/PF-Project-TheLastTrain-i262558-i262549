@@ -18,6 +18,15 @@ bool loadBuildingMap(const char* filename,
         return false;
     }
 
+    for (int f = 0; f < NUM_FLOORS; f++) {
+        for (int r = 0; r < ROOMS_PER_FLOOR; r++) {
+            entityCounts[f][r] = 0;
+            for (int k = 0; k < MAX_ENTITIES_PER_ROOM; k++) {
+                roomEntities[f][r][k] = ENT_NONE;
+            }
+        }
+    }
+    
     string lines[20];
     int lineCount = 0;
 

@@ -38,6 +38,20 @@ int main() {
         return 1;
     }
 
+    int startFloor, startRoom;
+    while (true) {
+        std::cout << "Enter starting floor (1-5): ";
+        std::cin >> startFloor;
+        std::cout << "Enter starting room (1-4): ";
+        std::cin >> startRoom;
+        if (std::cin.eof()) { return 1; }
+        if (!std::cin) { std::cin.clear(); std::cin.ignore(1000, '\n'); std::cout << "Please type numbers.\n"; continue; }
+        if (validateStartingRoom(startFloor - 1, startRoom - 1, horizontalConn)) { break; }
+        std::cout << "Invalid starting room, try again.\n";
+    }
+    playerFloor = startFloor - 1;
+    playerRoom = startRoom - 1;
+
     std::cout << "===========================================\n";
     std::cout << " THE LAST TRAIN - SIMULATION INITIALIZED   \n";
     std::cout << "===========================================\n";
