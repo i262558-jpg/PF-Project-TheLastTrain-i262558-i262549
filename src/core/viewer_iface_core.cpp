@@ -45,3 +45,35 @@ void renderRoomDetails(int floor, int room,
         }
     }
 }
+
+void renderObjectivesChecklist(const bool objectives[NUM_OBJECTIVES])
+{
+    const char* names[NUM_OBJECTIVES] = {
+        "Master Key collected",
+        "Clue digit 4 found",
+        "Clue digit 2 found",
+        "Clue digit 7 found",
+        "Cabinet unlocked",
+        "Train Key acquired",
+        "Fuse collected",
+        "Fuse installed",
+        "Lift Pass collected",
+        "Lift 2 active",
+        "Passenger rescued",
+        "Cat Carrier collected",
+        "Cat secured",
+        "Train prepared",
+        "Mission won",
+        "Mission failed"
+    };
+
+    printHeader("OBJECTIVES");
+    for (int i = 0; i < NUM_OBJECTIVES; i++) {
+        if (objectives[i] == true) {
+            cout << "[X] " << names[i] << endl;
+        }
+        else {
+            cout << "[ ] " << names[i] << endl;
+        }
+    }
+}
