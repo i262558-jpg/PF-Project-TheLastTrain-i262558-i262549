@@ -36,6 +36,15 @@ bool loadBuildingMap(const char* filename,
         lineCount++;
     }
 
+        if (lineCount < 16) {
+        return false;
+    }
+    for (int i = 2; i <= 15; i++) {
+        if (lines[i].size() < 57) {
+            return false;
+        }
+    }
+
     for (int r = 0; r < NUM_FLOORS; r++) {
         for (int c = 0; c < ROOMS_PER_FLOOR - 1; c++) {
             horizontalConn[r][c] = lines[14 - 3 * r][20 + 12 * c];
@@ -154,16 +163,22 @@ bool loadInitialState(const char* filename,
     }
 
     string line;
-    while (getline(file, line)) {
-        if (line.find("INITIAL_ENERGY:") == 0) {
-            energy = stoi(line.substr(15));
+
+    try {
+        while (getline(file, line)) {
+            if (line.find("INITIAL_ENERGY:") == 0) {
+                energy = stoi(line.substr(15));
+            }
+            if (line.find("INITIAL_TIME:") == 0) {
+                time = stoi(line.substr(13));
+            }
+            if (line.find("INITIAL_SCORE:") == 0) {
+                score = stoi(line.substr(14));
+            }
         }
-        if (line.find("INITIAL_TIME:") == 0) {
-            time = stoi(line.substr(13));
-        }
-        if (line.find("INITIAL_SCORE:") == 0) {
-            score = stoi(line.substr(14));
-        }
+    }
+    catch (...) {
+        return false;
     }
 
     file.close();
