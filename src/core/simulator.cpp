@@ -136,6 +136,11 @@ bool handleCollectCommand(char itemSymbol, int currentFloor, int currentRoom,
         cout<<"No item in this room"<<endl;
         return false;
       }
+      if(itemSymbol == ENT_CABINET_TRAIN_KEY&&!objectives[OBJ_CABINET_UNLOCKED])
+        {
+           cout<<"Unlock the cabinet first."<<endl;
+           return false;
+        }
     bool requiresInventory=true;
     if (itemSymbol==ENT_ENERGY_PACK||itemSymbol==ENT_EMERGENCY_TOOLKIT||itemSymbol == ENT_OBSERVATION_TOKEN)
     {
@@ -286,8 +291,7 @@ bool handleCollectCommand(char itemSymbol, int currentFloor, int currentRoom,
   }
 bool handleUnlockCabinetCommand(const char* code, int currentFloor, int currentRoom,
                                 bool objectives[NUM_OBJECTIVES], int& score,
-                                char roomEntities[NUM_FLOORS][ROOMS_PER_FLOOR][MAX_ENTITIES_PER_ROOM],
-                                int& entityCount, int& energy, int& time)
+                                 int& energy, int& time)
   {
     if(currentFloor!=4 || currentRoom!=0)
     {
@@ -301,19 +305,6 @@ bool handleUnlockCabinetCommand(const char* code, int currentFloor, int currentR
     {
       return false;
     }
-    if(entityCount<0 || entityCount>=MAX_ENTITIES_PER_ROOM)
-    {
-      return false;
-    }
-    for(int i=0;i<entityCount;i++)
-    {
-      if(roomEntities[4][0][i]==ENT_CABINET_TRAIN_KEY)
-      {
-        return false;
-      }
-    }
-    roomEntities[4][0][entityCount]=ENT_CABINET_TRAIN_KEY;
-    entityCount++;
     objectives[OBJ_CABINET_UNLOCKED]=true;
     applyScoreDelta(score,SCORE_CABINET_UNLOCK);
     applyResourceDelta(energy,time,COST_ITEM_USE_ENERGY,COST_ITEM_USE_TIME);
@@ -329,6 +320,9 @@ void runSimulation(int& playerFloor, int& playerRoom,
 {
     char command[20];
     bool running=true;
+    const int MAX_AUDIT_ENTRIES = 200;
+    char sessionAudit[MAX_AUDIT_ENTRIES][50];
+    int auditCount = 0;
 
     while(running)
     {
@@ -355,6 +349,18 @@ cout<<"board,save,load,map,status,quit\n";
 cout<<"\nEnter command:";
 cin.width(20);
  cin>>command;
+ if(auditCount < MAX_AUDIT_ENTRIES)
+{
+    int i=0;
+
+    while(command[i]!='\0'&&i<49)
+    {
+        sessionAudit[auditCount][i]=command[i];
+        i++;
+    }
+    sessionAudit[auditCount][i]='\0';
+    auditCount++;
+}
 
 if(!cin)
 {
@@ -404,6 +410,7 @@ else if(stringEquals(command,"collect"))
     char itemSymbol;
     cout<<"Enter item symbol:";
     cin>>itemSymbol;
+    cin.ignore(1000,'\n');
     if(!handleCollectCommand(itemSymbol,playerFloor,playerRoom,energy,time,score,roomEntities,entityCounts[playerFloor][playerRoom],inventory,inventoryCount,objectives,emergencyTripsLeft))
       {
         cout<<"Collection failed."<<endl;
@@ -414,6 +421,7 @@ else if(stringEquals(command,"use"))
        char itemSymbol;
       cout<<"Enter item symbol to use:";
       cin>>itemSymbol;
+      cin.ignore(1000,'\n');
       if(!handleUseCommand(itemSymbol,playerFloor,playerRoom,energy,time,score,inventory,inventoryCount,objectives,horizontalConn))
        {
         cout<<"Cannot use this item here."<<endl;
@@ -425,7 +433,7 @@ else if(stringEquals(command,"unlock"))
     cout<<"Enter cabinet code:";
     cin.width(8);
     cin>>code;
-    if(handleUnlockCabinetCommand(code,playerFloor,playerRoom,objectives,score,roomEntities,entityCounts[4][0],energy,time))
+    if(handleUnlockCabinetCommand(code,playerFloor,playerRoom,objectives,score,energy,time))
       {
         cout<<"Cabinet unlocked! Train Key is available."<<endl;
       }
@@ -503,7 +511,7 @@ else if(stringEquals(command,"quit"))
     }
   }
 bool victory=objectives[OBJ_MISSION_WON];
-writeGameSummaryReport("out/game_summary.txt",score,energy,time,objectives,victory);
+writeGameSummaryReport("out/game_summary.txt",score,energy,time,objectives,victory,sessionAudit,auditCount);
   cout<<"\n====================================\n";
   cout<<"          SIMULATION ENDED          \n";
   cout<<"====================================\n";

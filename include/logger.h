@@ -22,6 +22,6 @@ bool loadGameStateFromFile(const char* filename,
 
 void writeGameSummaryReport(const char* filename,
                             int score, int remainingEnergy, int remainingTime,
-                            const bool objectives[NUM_OBJECTIVES], bool victory);
+                            const bool objectives[NUM_OBJECTIVES], bool victory, const char sessionAudit[][50], int auditCount);
 
 #endif // LOGGER_H

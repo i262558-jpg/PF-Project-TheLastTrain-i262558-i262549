@@ -15,7 +15,7 @@ bool canUseLift1(int fromFloor, int toFloor)
 }
 bool canUseLift2(int fromFloor, int toFloor, bool lift2Operational, int emergencyTripsLeft)
 {
-    if(!(fromFloor==1&&toFloor==3 )||( fromFloor==3 && toFloor==1)||(fromFloor==1 && toFloor==4 )|| (fromFloor==4 && toFloor==1)||(fromFloor==3 && toFloor==4) ||( fromFloor==4 && toFloor==3))
+    if((fromFloor==1&&toFloor==3 )||( fromFloor==3 && toFloor==1)||(fromFloor==1 && toFloor==4 )|| (fromFloor==4 && toFloor==1)||(fromFloor==3 && toFloor==4) ||( fromFloor==4 && toFloor==3))
     return false;
    
     if (lift2Operational)

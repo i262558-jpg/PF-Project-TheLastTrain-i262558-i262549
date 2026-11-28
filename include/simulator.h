@@ -39,8 +39,7 @@ bool handleUseCommand(char itemSymbol, int currentFloor, int currentRoom,
 
 bool handleUnlockCabinetCommand(const char* code, int currentFloor, int currentRoom,
                                 bool objectives[NUM_OBJECTIVES], int& score,
-                                char roomEntities[NUM_FLOORS][ROOMS_PER_FLOOR][MAX_ENTITIES_PER_ROOM],
-                                int& entityCount,int& energy, int& time);
+                                int& energy, int& time);
 
 bool checkEndConditions(int energy, int time, const bool objectives[NUM_OBJECTIVES]);
 
