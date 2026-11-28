@@ -3,6 +3,7 @@
 #include "level.h"
 #include "util.h"
 #include <fstream>
+#include "physics.h"
 
 using namespace std;
 // Modular implementation using primitive arrays for map parsing and verification
@@ -104,15 +105,22 @@ const char* getEntityName(char entitySymbol)
 bool validateStartingRoom(int startFloor, int startRoom,
                           const char horizontalConn[NUM_FLOORS][ROOMS_PER_FLOOR - 1])
 {
-    (void)horizontalConn;
-
     if (startFloor < 0 || startFloor >= NUM_FLOORS) {
         return false;
     }
-    if(startRoom < 0 || startRoom >= ROOMS_PER_FLOOR){
+    if (startRoom < 0 || startRoom >= ROOMS_PER_FLOOR) {
         return false;
     }
-    return true;
+
+    for (int f = 0; f < NUM_FLOORS; f++) {
+        for (int r = 0; r < ROOMS_PER_FLOOR; r++) {
+            char connType;
+            if (isDirectlyConnected(startFloor, startRoom, f, r, horizontalConn, connType)) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 bool loadInitialState(const char* filename,
