@@ -49,7 +49,7 @@ void renderRoomDetails(int floor, int room,
     else {
         cout << "Items and objects here: " << endl;
         for (int i = 0; i < entityCount; i++) {
-            cout << "- " << getEntityName(roomEntities[floor][room][i]) << endl;
+            cout << "- " << getEntityName(roomEntities[floor][room][i]) << " (" << roomEntities[floor][room][i] << ")" << endl;
         }
     }
 }
