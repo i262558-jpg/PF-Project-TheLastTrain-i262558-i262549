@@ -1,0 +1,72 @@
+Final Score:520
+Remaining Energy:5
+Remaining Time:1
+Mission Status: Victory
+
+OBJECTIVE CHECKLIST
+Master Key collected:Completed
+Clue digit 4 found:Completed
+Clue digit 2 found:Completed
+Clue digit 7 found:Completed
+Cabinet unlocked:Completed
+Train Key acquired:Completed
+Fuse collected:Completed
+Fuse installed:Completed
+Lift Pass collected:Completed
+Lift 2 active:Completed
+Passenger rescued:Completed
+Cat Carrier collected:Completed
+Cat secured:Completed
+Train prepared:Completed
+Mission won:Completed
+Mission failed:Incomplete
+
+SESSION AUDIT
+1.move
+2.collect
+3.collect
+4.move
+5.use
+6.move
+7.move
+8.move
+9.collect
+10.move
+11.collect
+12.move
+13.move
+14.move
+15.collect
+16.move
+17.move
+18.move
+19.move
+20.inspect
+21.collect
+22.move
+23.move
+24.collect
+25.use
+26.move
+27.use
+28.move
+29.move
+30.move
+31.move
+32.move
+33.move
+34.move
+35.move
+36.move
+37.inspect
+38.move
+39.move
+40.move
+41.move
+42.move
+43.inspect
+44.unlock
+45.collect
+46.move
+47.save
+48.board
